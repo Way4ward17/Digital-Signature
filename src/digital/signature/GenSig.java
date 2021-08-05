@@ -6,6 +6,7 @@
 package digital.signature;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.security.KeyPair;
@@ -21,14 +22,16 @@ import java.security.Signature;
  */
 public class GenSig {
     
+        boolean verifies = false;
     /* Generate a DSA signature */
 
-       public static void main(String[] args) {
+       public Boolean GenSig(File file) {
 
         /* Generate a DSA signature */
 
-        if (args.length != 1) {
+        if (file == null) {
             System.out.println("Usage: GenSig nameOfFileToSign");
+            verifies = false;
         }
         else try {
 
@@ -42,7 +45,7 @@ public class GenSig {
         Signature dsa = Signature.getInstance("SHA1withDSA", "SUN"); 
         dsa.initSign(priv);
         
-        FileInputStream fis = new FileInputStream(args[0]);
+        FileInputStream fis = new FileInputStream(file);
         BufferedInputStream bufin = new BufferedInputStream(fis);
         byte[] buffer = new byte[1024];
         int len;
@@ -64,10 +67,12 @@ public class GenSig {
         FileOutputStream keyfos = new FileOutputStream("suepk");
         keyfos.write(key);
         keyfos.close();
+        verifies = true;
         
         
         } catch (Exception e) {
             System.err.println("Caught exception " + e.toString());
         }
+        return verifies;
     }
 }

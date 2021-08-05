@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="559.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="digital.signature.MainController">
+<AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="559.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digital.signature.MainController">
    <children>
       <ImageView fitHeight="351.0" fitWidth="559.0" layoutX="-2.0" layoutY="26.0" opacity="0.59" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../../images/logo.jpg" />
          </image>
       </ImageView>
-      <TextField fx:id="editPath" editable="false" focusTraversable="false" layoutX="29.0" layoutY="183.0" prefHeight="37.0" prefWidth="423.0" promptText="Click to choose file to sign" />
-      <JFXButton buttonType="RAISED" layoutX="176.0" layoutY="242.0" onAction="#signDocument" prefHeight="37.0" prefWidth="207.0" style="-fx-background-color: green;" text="Sign Document" textFill="WHITE">
+      <TextField fx:id="editPath" editable="false" focusTraversable="false" layoutX="28.0" layoutY="166.0" prefHeight="37.0" prefWidth="423.0" promptText="No result choosen" />
+      <JFXButton fx:id="button" buttonType="RAISED" layoutX="168.0" layoutY="300.0" onAction="#signDocument" prefHeight="37.0" prefWidth="207.0" style="-fx-background-color: green;" text="Sign Result" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
@@ -39,6 +44,37 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Button layoutX="465.0" layoutY="189.0" mnemonicParsing="false" onAction="#chooseFile" prefHeight="25.0" prefWidth="81.0" text="Choose" />
+      <Button layoutX="464.0" layoutY="172.0" mnemonicParsing="false" onAction="#chooseFile" prefHeight="25.0" prefWidth="81.0" text="Choose" />
+      <HBox layoutX="115.0" layoutY="254.0" style="-fx-background-color: white; -fx-padding: 10px;">
+         <children>
+            <JFXRadioButton fx:id="signRadioBtn" onMouseClicked="#radioSign" prefHeight="17.0" prefWidth="156.0" selected="true" text="Sign Document">
+               <toggleGroup>
+                  <ToggleGroup fx:id="pick" />
+               </toggleGroup>
+            </JFXRadioButton>
+            <RadioButton mnemonicParsing="false" onMouseClicked="#radioVerify" text="Verifiy Document" textFill="#27e456" toggleGroup="$pick">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </RadioButton>
+         </children>
+      </HBox>
+      <AnchorPane layoutX="171.0" layoutY="212.0" prefHeight="31.0" prefWidth="194.0" style="-fx-padding: 5px; -fx-background-color: white;">
+         <children>
+            <Text fx:id="errorMsg" layoutX="86.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="panee" layoutX="28.0" layoutY="88.0" visible="false">
+         <children>
+            <TextField fx:id="editPath1" editable="false" focusTraversable="false" prefHeight="37.0" prefWidth="423.0" promptText="No public key choosen" />
+            <Button layoutX="436.0" layoutY="6.0" mnemonicParsing="false" onAction="#chooseKey" prefHeight="25.0" prefWidth="81.0" text="Choose" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="panee1" layoutX="27.0" layoutY="127.0" visible="false">
+         <children>
+            <TextField fx:id="editPath11" editable="false" focusTraversable="false" prefHeight="37.0" prefWidth="423.0" promptText="No Signature choosen" />
+            <Button layoutX="436.0" layoutY="6.0" mnemonicParsing="false" onAction="#chooseSignature" prefHeight="25.0" prefWidth="81.0" text="Choose" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

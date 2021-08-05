@@ -25,6 +25,7 @@ public class DigitalSignature extends Application {
         
         stage.setScene(scene);
         stage.setMaximized(false);
+        stage.setTitle("Document Signature");
         stage.show();
     }
 
